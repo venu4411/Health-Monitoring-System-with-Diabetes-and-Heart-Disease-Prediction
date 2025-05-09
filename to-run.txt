@@ -1,0 +1,5 @@
+pip install flask pandas scikit-learn joblib
+
+cd "D:\diabetes"
+
+ python app.py

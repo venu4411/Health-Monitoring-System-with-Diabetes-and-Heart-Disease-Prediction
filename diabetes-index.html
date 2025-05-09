@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Predictor Application</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            background-position: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .glass-container {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 20px;
+            max-width: 900px;
+            width: 90%;
+        }
+        h1 {
+            font-size: 2em;
+            margin-top: 10px;
+            color: #000000;
+        }
+        .form-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px; /* Adjusted gap */
+            margin: 20px auto;
+        }
+        .input-box {
+            flex: 1 1 calc(45% - 10px); /* Smaller size for boxes */
+            max-width: calc(45% - 10px); /* Smaller size for boxes */
+        }
+        .input-box input {
+            width: 100%;
+            padding: 8px; /* Decreased padding */
+            margin: 5px 0;
+            border: 2px solid #00ff00;
+            border-radius: 5px;
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            font-size: 0.9em; /* Slightly smaller font */
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        .button-container button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #00f;
+            color: #fff;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 1em;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="glass-container">
+        <h1>DIABETES PREDICTOR APPLICATION</h1>
+        <form action="{{ url_for('predict') }}" method="post">
+            <div class="form-container">
+                <div class="input-box">
+                    <input type="text" name="Pregnancies" placeholder="Pregnancies" 
+                           value="{{ request.form.get('Pregnancies', '') }}" required>
+                </div>
+                <div class="input-box">
+                    <input type="text" name="Glucose" placeholder="Glucose" 
+                           value="{{ request.form.get('Glucose', '') }}" required>
+                </div>
+                <div class="input-box">
+                    <input type="text" name="BloodPressure" placeholder="Blood Pressure" 
+                           value="{{ request.form.get('BloodPressure', '') }}" required>
+                </div>
+                <div class="input-box">
+                    <input type="text" name="SkinThickness" placeholder="Skin Thickness" 
+                           value="{{ request.form.get('SkinThickness', '') }}" required>
+                </div>
+                <div class="input-box">
+                    <input type="text" name="Insulin" placeholder="Insulin" 
+                           value="{{ request.form.get('Insulin', '') }}" required>
+                </div>
+                <div class="input-box">
+                    <input type="text" name="BMI" placeholder="BMI" 
+                           value="{{ request.form.get('BMI', '') }}" required>
+                </div>
+                <div class="input-box">
+                    <input type="text" name="DiabetesPedigreeFunction" placeholder="Diabetes Pedigree Function" 
+                           value="{{ request.form.get('DiabetesPedigreeFunction', '') }}" required>
+                </div>
+                <div class="input-box">
+                    <input type="text" name="Age" placeholder="Age" 
+                           value="{{ request.form.get('Age', '') }}" required>
+                </div>
+            </div>
+            <div class="button-container">
+                <button type="submit">Predict your Results Now!</button>
+            </div>
+        </form>
+        <div class="footer">
+            Developed by TRV 
+        </div>
+        {% if prediction_text %}
+        <h3>{{ prediction_text }}</h3>
+        {% endif %}
+    </div>
+</body>
+</html>
